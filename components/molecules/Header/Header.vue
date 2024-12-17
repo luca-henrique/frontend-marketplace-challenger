@@ -10,6 +10,7 @@
       <nav class="flex flex-row">
         <ul class="menu flex flex-row items-center gap-16">
           <li><a href="#" class="active">Home</a></li>
+          <li><a href="/order">Meus pedidos</a></li>
           <li>
             <a href="/checkout"><i class="bx bx-shopping-bag"></i></a>
           </li>

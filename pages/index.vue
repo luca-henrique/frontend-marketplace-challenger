@@ -132,4 +132,8 @@ ul {
     grid-template-columns: 1fr;
   }
 }
+
+.justify-center{
+  justify-content: center;
+}
 </style>

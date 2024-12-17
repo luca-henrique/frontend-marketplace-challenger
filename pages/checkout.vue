@@ -54,10 +54,13 @@ const response = await fetch("http://localhost:3333/address-by-user", {
 });
 
 const { address } = await response.json();
+
+import Header from '~/components/molecules/Header/Header.vue';
 </script>
 
 <template>
   <div class="container">
+    <Header />
     <div class="content">
       <div class="flex flex-row items-center header-title">
         <h1>Shopping Cart</h1>

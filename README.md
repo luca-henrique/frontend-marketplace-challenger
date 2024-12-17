@@ -1,4 +1,6 @@
 ## task
 
 [] listar orders
-[] auth
+[] rotas auth
+[] search ( buscar )
+[] option para buscar por limite

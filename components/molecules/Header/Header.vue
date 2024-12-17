@@ -19,7 +19,6 @@
         </ul>
       </nav>
     </div>
-  
     <div class="flex flex-row items-center gap-2 mobile-container">
       <a href="#"><i class="bx bx-shopping-bag"></i></a>
       <button class="menu-mobile">

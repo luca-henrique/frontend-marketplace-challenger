@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import ListProducts from '~/components/organisms/ListProducts/ListProducts.vue';
-  import Header from '~/components/molecules/Header/Header.vue';
+import ListProducts from '~/components/organisms/ListProducts/ListProducts.vue';
+import Header from '~/components/molecules/Header/Header.vue';
 </script>
 
 <template>
@@ -51,6 +51,11 @@ body {
   width: 100vw;
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
+
 .justify-between {
   justify-content: space-between;
 }
@@ -61,7 +66,9 @@ ul {
   padding: 0;
 }
 
-
+.flex-col{
+  flex-direction: column;
+}
 
 .menu-mobile {
   display: none;
@@ -90,18 +97,17 @@ ul {
   border-bottom: 2px solid #f63e4e;
 }
 
-.mobile-container{
+.mobile-container {
   display: none;
 }
 
 @media (max-width: 768px) {
   .product-list ul {
-    grid-template-columns: repeat(
-      2,
-      1fr
-    ); /* Altera para 2 colunas em telas menores */
+    grid-template-columns: repeat(2,
+        1fr);
+    /* Altera para 2 colunas em telas menores */
   }
-  
+
   .product-list {
     margin-top: 40px;
     justify-content: center;
@@ -115,15 +121,15 @@ ul {
   .menu-mobile {
     display: flex;
   }
-  
-  .mobile-container{
+
+  .mobile-container {
     display: flex;
   }
 }
 
 @media (max-width: 480px) {
   .product-list ul {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 }
 </style>

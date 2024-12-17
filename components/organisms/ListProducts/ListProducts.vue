@@ -1,8 +1,10 @@
 <script setup lang="ts">
   import { store } from '~/store/store';
-  const baseUrl = "http://localhost:3333/product?limit=10";
-  const url = computed(() => baseUrl);
-  const { data } = useFetch(url);
+  
+  
+  const response = await fetch("http://localhost:3333/product?limit=10");
+  
+  const {data} = await response.json()
 
   const { addProductCart } = store()
   
@@ -12,7 +14,7 @@
 <template>
   <section class="product-list">
     <ul class="flex flex-row">
-      <li v-for="item in data.data" :key="item.id">
+    <li v-if="data.length >= 1" v-for="item in data" :key="item.id">
         <div class="card">
           <img :src="item.image" alt="img" loading="lazy" width="150px" class="img" />
           <div class="name">{{ item.name }}</div>
@@ -28,7 +30,7 @@
             <button class="btn" @click="addProductCart(item)">Comprar</button>
           </div>
         </div>
-      </li>
+      </li> 
     </ul>
   </section>
 </template>

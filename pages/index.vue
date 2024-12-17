@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import ListProducts from '~/components/organisms/ListProducts/ListProducts.vue';
-
-
-
+  import ListProducts from '~/components/organisms/ListProducts/ListProducts.vue';
 </script>
 
 <template>
@@ -13,7 +10,6 @@ import ListProducts from '~/components/organisms/ListProducts/ListProducts.vue';
         <nav class="flex flex-row">
           <ul class="menu flex flex-row items-center gap-16">
             <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">Produtos</a></li>
             <li>
               <a href="/checkout"><i class="bx bx-shopping-bag"></i></a>
             </li>
@@ -35,7 +31,7 @@ import ListProducts from '~/components/organisms/ListProducts/ListProducts.vue';
   </div>
 </template>
 
-<style>
+<style lang="css">
 h1,
 h2,
 h3,

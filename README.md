@@ -19,3 +19,8 @@ descricao
 categoria: vai ser uma string
 validacoes
 api
+
+## task
+
+[] listar orders
+[] auth

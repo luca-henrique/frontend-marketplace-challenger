@@ -27,7 +27,7 @@ const handleSubmitOrder = async () => {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          `Bearer ${getToken}`,
+          `Bearer ${getToken.value}`,
       },
       body: JSON.stringify(submitEvent),
     });
@@ -49,7 +49,7 @@ const handleSubmitOrder = async () => {
 const response = await fetch("http://localhost:3333/address-by-user", {
   headers: {
     Authorization:
-    `Bearer ${getToken}`,
+    `Bearer ${getToken.value}`,
   },
 });
 
@@ -202,7 +202,7 @@ const { address } = await response.json();
         </div>
       </div>
 
-      <button class="btn-checkout" @click="handleSubmitOrder()">
+      <button :class="getCart.length == 0 ? 'disabled' : ''" class="btn-checkout" @click="handleSubmitOrder()" :disabled="getCart.length == 0">
         Finalizar compra
       </button>
     </div>
@@ -227,6 +227,10 @@ button {
 .order-summary .label {
   font-weight: 400;
   color: #8f8f8f;
+}
+
+.disabled{
+  background-color: #d0d0d0 !important;
 }
 
 .label {

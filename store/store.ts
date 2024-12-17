@@ -5,6 +5,7 @@ interface Product {
   name: string;
   price: number;
   quantity: number;
+  image: string;
 }
 
 interface OrderProduct {
@@ -13,10 +14,12 @@ interface OrderProduct {
   image: string;
 }
 
+type OrderProducts = Omit<OrderProduct, "image">;
+
 interface State {
   cart: Product[];
   total: number;
-  products: OrderProduct[];
+  products: OrderProducts[];
   token: string;
 }
 
@@ -49,7 +52,7 @@ export const store = defineStore("store", {
         this.cart = [...this.cart, { ...payload, quantity: 1 }];
       }
 
-      const products = this.getCart.map((item) => {
+      const products: OrderProducts[] = this.getCart.map((item) => {
         return {
           id_product: item.id,
           quantity: item.quantity,
@@ -104,7 +107,7 @@ export const store = defineStore("store", {
         );
       }
 
-      this.getCart.map((item) => {
+      this.getCart.forEach((item) => {
         this.total += item.price;
       });
     },
@@ -112,6 +115,8 @@ export const store = defineStore("store", {
     resetCart() {
       this.cart = [];
       this.total = 0;
+      this.products = [];
+      this.token = "";
     },
 
     addToken(token: string) {
@@ -122,6 +127,5 @@ export const store = defineStore("store", {
       this.token = "";
     },
   },
-
   persist: true,
 });

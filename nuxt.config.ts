@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  css: ["~/styles/global.css"],
+  css: ["~/styles/global.css", "~/assets/css/tailwind.css"],
   alias: {
     css: "/<rootDir>/styles",
   },
@@ -10,7 +10,19 @@ export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt", // required
     "pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/tailwindcss",
   ],
+
+  tailwindcss: {
+    exposeConfig: true,
+    viewer: true,
+  },
+
+  build: {
+    postcss: {
+      postcssOptions: require("./postcss.config.js"),
+    },
+  },
 
   app: {
     head: {

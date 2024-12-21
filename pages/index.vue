@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import '@/assets/css/tailwind.css'
 import ListProducts from '~/components/organisms/ListProducts/ListProducts.vue';
 import Header from '~/components/molecules/Header/Header.vue';
 </script>
 
 <template>
-  <div class="container">
+  <div class="container ">
     <Header />
     <ListProducts />
   </div>
@@ -66,7 +67,7 @@ ul {
   padding: 0;
 }
 
-.flex-col{
+.flex-col {
   flex-direction: column;
 }
 
@@ -133,7 +134,7 @@ ul {
   }
 }
 
-.justify-center{
+.justify-center {
   justify-content: center;
 }
 </style>

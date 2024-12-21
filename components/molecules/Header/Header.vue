@@ -12,8 +12,8 @@ const isCheckoutRouter = computed(() => route.path === '/checkout');
 </script>
 
 <template>
-  <header class="navigation">
-    <div class="flex flex-row justify-between content">
+  <header class="w-screen">
+    <div class="flex flex-row justify-between">
       <h1 class="padding-vertical"><a href="/">Marketplace</a></h1>
       <div class="flex flex-row menu-navigation padding-vertical">
         <nav class="flex flex-row">
@@ -39,27 +39,4 @@ const isCheckoutRouter = computed(() => route.path === '/checkout');
   </header>
 </template>
 
-<style scoped lang="css">
-.navigation {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: sticky;
-  z-index: 9999;
-  background-color: #f4f4f6;
-  box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
-}
-
-.content {
-  width: 80%;
-}
-
-.padding-vertical {
-  padding: 20px 0;
-}
-
-.active {
-  cursor: pointer;
-}
-</style>
+<style scoped lang="css"></style>

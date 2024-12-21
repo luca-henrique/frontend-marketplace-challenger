@@ -20,5 +20,6 @@ const handleClick = () => {
     <IconButton buttonType="contained" />
     <IconButton buttonType="outlined" />
     <IconButton buttonType="thierdContained" />
+    <IconButton buttonType="outlinedSeconary" />
   </div>
 </template>

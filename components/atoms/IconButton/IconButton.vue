@@ -6,7 +6,7 @@ import eye from "~/assets/icons/eye-icon.svg"
 import close from "~/assets/icons/close-icon.svg"
 
 type ItemSize = "small" | "medium" | "large";
-type ButtonType = "outlined" | "contained" | "containedSecondary" | "thierdContained";
+type ButtonType = "outlined" | "contained" | "containedSecondary" | "thierdContained" | 'outlinedSeconary';
 
 
 const icons = {
@@ -27,6 +27,8 @@ const buttonSize: Record<ItemSize, string> = {
 };
 
 const types: Record<ButtonType, string> = {
+  outlinedSeconary:
+    "border-2 border-[#ccc] hover:border-[#1A1A1A] text-[#EEF7ED] hover:text-[#1A1A1A]",
   outlined:
     "border-2 border-[#00B207] hover:border-[#2C742F] text-[#00B207] hover:text-[#2C742F]",
   contained: "bg-[#00B207] text-white hover:bg-[#2C742F]",

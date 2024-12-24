@@ -2,7 +2,7 @@
 import { computed, defineProps } from "vue";
 
 type ItemSize = "small" | "medium" | "large";
-type ButtonType = "outlined" | "contained" | "containedSecondary";
+type ButtonType = "outlined" | "contained" | "containedSecondary" | 'thierdContained'
 
 const buttonSize: Record<ItemSize, string> = {
   small: "px-6 py-3 text-xs",
@@ -16,6 +16,8 @@ const types: Record<ButtonType, string> = {
   contained: "bg-[#00B207] text-white hover:bg-[#2C742F]",
   containedSecondary:
     "bg-[#EEF7ED] text-[#00B207] hover:bg-[#D5E3D5] hover:text-[#2C742F]",
+  thierdContained:
+    "bg-[#fff] text-[#00B207] hover:bg-[#00B207] hover:text-[#fff] shadow-md",
 };
 
 function getButtonSize(size: ItemSize): string {
@@ -32,6 +34,7 @@ const props = defineProps<{
   buttonType?: ButtonType;
   text?: string;
   onClick?: () => void;
+  class?: string
 }>();
 
 // Atribuindo valores padrão caso não sejam passados
@@ -40,7 +43,7 @@ const buttonType = props.buttonType || "contained";
 const text = props.text || "Default Text";
 
 const buttonStyle = computed(() =>
-  `${getButtonSize(sizeType)} ${getType(buttonType)} rounded-full transition duration-300 font-semibold`
+  `${getButtonSize(sizeType)} ${getType(buttonType)} ${props.class} rounded-full transition duration-300 font-semibold`
 );
 
 </script>

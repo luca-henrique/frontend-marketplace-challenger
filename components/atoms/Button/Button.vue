@@ -38,7 +38,7 @@ const props = defineProps<{
 }>();
 
 // Atribuindo valores padrão caso não sejam passados
-const sizeType = props.sizeType || "large";
+const sizeType = props.sizeType || "small";
 const buttonType = props.buttonType || "contained";
 const text = props.text || "Default Text";
 

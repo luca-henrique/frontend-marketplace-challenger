@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, defineProps } from "vue";
-import shoppingBag from "~/assets/icons/shopping-bag-icon.svg"
+import shoppingBag from "~/assets/icons/bag-outlined-icon.svg"
 import heart from "~/assets/icons/heart-icon.svg"
 import eye from "~/assets/icons/eye-icon.svg"
 import close from "~/assets/icons/close-icon.svg"
@@ -66,7 +66,7 @@ const buttonStyle = computed(() =>
 </script>
 
 <template>
-  <button @click="props.onClick" class="icon-container">
+  <button @click="props.onClick" class="icon-container justify-center items-center flex">
     <img :src="icon" :alt="icon" :class="buttonStyle" />
   </button>
 </template>

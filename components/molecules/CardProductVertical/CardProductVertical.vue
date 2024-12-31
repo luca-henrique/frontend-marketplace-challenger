@@ -14,13 +14,9 @@ const cardSize = {
   large: "w-[312px]",
 }
 
-
 type PromotionTypeProps = 'sale' | 'new' | 'bestSale' | 'outStock'
 
-
-
 type ItemSize = keyof typeof cardSize
-
 
 type Brand = typeof cardSize[ItemSize];
 
@@ -44,13 +40,14 @@ const props = defineProps<{
 const title = props.title || "Chanise Cabbage";
 const price = props.price || 10;
 const rating = props.rating || 3.5;
-const size = props.size ? getCardSize(props.size) : getCardSize('medium')
+const size = props.size ? getCardSize(props.size) : getCardSize('small')
 
 </script>
 
 
 <template>
-  <div class=" flex flex-col border-2 border-[#E6E6E6] hover:border-[#2C742F] relative shadow-md rounded-lg h-full"
+  <div
+    class=" flex flex-col border-2 border-[#E6E6E6] hover:border-[#2C742F] relative shadow-md rounded-lg h-full cursor-pointer"
     :class="size" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
     <img :class="size" :src="FruitImg" alt="fruit" class="h-full object-contain mt-1" />
     <div class="flex flex-row justify-between  p-4">
@@ -66,7 +63,7 @@ const size = props.size ? getCardSize(props.size) : getCardSize('medium')
           :disableClick="false" />
       </div>
 
-      <IconButton icon="shoppingBag" />
+      <IconButton icon="shoppingBag" buttonType="thierdContained" />
 
 
       <div :class="{ 'flex flex-col gap-2 mt-1 absolute top-1 right-4': isHovered, 'hidden': !isHovered }">
@@ -74,7 +71,7 @@ const size = props.size ? getCardSize(props.size) : getCardSize('medium')
         <IconButton icon="heart" buttonType="outlinedSeconary" />
       </div>
 
-      <div class="absolute top-4 left-4">
+      <div v-if="promotionType" class="absolute top-4 left-4">
         <Brand :brandType="promotionType" />
       </div>
 

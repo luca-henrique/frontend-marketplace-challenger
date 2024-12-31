@@ -21,6 +21,7 @@ interface State {
   total: number;
   products: OrderProducts[];
   token: string;
+  whitheList: Product[];
 }
 
 export const store = defineStore("store", {
@@ -29,12 +30,16 @@ export const store = defineStore("store", {
     total: 0,
     products: [],
     token: "",
+    whitheList: [],
   }),
   getters: {
     getCart: (state) => state.cart,
     getTotal: (state) => state.total,
     getProducts: (state) => state.products,
     getToken: (state) => state.token,
+    getTotalWhiteList: (state) => state.whitheList.length,
+    getTotalCart: (state) => state.cart.length,
+    getTotalCartPrice: (state) => state.cart.length,
   },
   actions: {
     addProductCart(payload: Product) {

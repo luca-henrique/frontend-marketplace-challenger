@@ -5,6 +5,7 @@ import StarRatings from "vue3-star-ratings"
 import IconButton from "~/components/atoms/IconButton/IconButton.vue";
 import Brand from "~/components/atoms/Brand/Brand.vue";
 import PriceText from "../PriceText/PriceText.vue";
+import { store } from "~/store/store";
 
 const isHovered = ref(false);
 
@@ -20,6 +21,11 @@ type ItemSize = keyof typeof cardSize
 
 type Brand = typeof cardSize[ItemSize];
 
+
+const storeAction = store()
+
+const { addProductWhiteList, addProductCart } =
+  storeAction;
 
 function getCardSize(key: ItemSize): Brand {
   return cardSize[key];
@@ -42,6 +48,15 @@ const price = props.price || 10;
 const rating = props.rating || 3.5;
 const size = props.size ? getCardSize(props.size) : getCardSize('small')
 
+
+const product = {
+  id: new Date().getTime(),
+  name: '',
+  price: 1100.0,
+  quantity: 10,
+  image: ''
+}
+
 </script>
 
 
@@ -63,12 +78,12 @@ const size = props.size ? getCardSize(props.size) : getCardSize('small')
           :disableClick="false" />
       </div>
 
-      <IconButton icon="shoppingBag" buttonType="thierdContained" />
+      <IconButton icon="shoppingBag" buttonType="thierdContained" :onClick="() => addProductCart(product)" />
 
 
       <div :class="{ 'flex flex-col gap-2 mt-1 absolute top-1 right-4': isHovered, 'hidden': !isHovered }">
         <IconButton icon="eye" buttonType="outlinedSeconary" />
-        <IconButton icon="heart" buttonType="outlinedSeconary" />
+        <IconButton icon="heart" buttonType="outlinedSeconary" :onClick="() => addProductWhiteList(product)" />
       </div>
 
       <div v-if="promotionType" class="absolute top-4 left-4">

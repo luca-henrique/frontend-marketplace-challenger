@@ -131,6 +131,18 @@ export const store = defineStore("store", {
     removeToken() {
       this.token = "";
     },
+
+    addProductWhiteList(payload: Product) {
+      console.log(payload);
+
+      const findProduct = this.whitheList.find(
+        (product) => product.id === payload.id
+      );
+
+      if (!findProduct) {
+        this.whitheList = [...this.whitheList, { ...payload, quantity: 1 }];
+      }
+    },
   },
   persist: true,
 });

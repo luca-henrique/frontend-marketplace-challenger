@@ -6,7 +6,7 @@ import { store } from "~/store/store";
 
 const storeCart = store();
 
-const { getTotalWhiteList, getTotalCart, getTotalCartPrice } = storeToRefs(storeCart);
+const { getTotalWhiteList, getTotalCart, getTotalCartPrice, getTotal } = storeToRefs(storeCart);
 
 const handleSearchProduct = (payload: Event) => {
   payload.preventDefault()
@@ -48,13 +48,6 @@ const handleSearchProduct = (payload: Event) => {
         <p
           class="absolute -top-1 left-5 w-6 h-6  flex items-center justify-center bg-green-500 font-light text-xs text-white  rounded-full border-2 border-white">
           {{ getTotalCart }}</p>
-        <div class="flex flex-col items-start ">
-          <h1 class="text-[#4D4D4D] font-normal text-xs">My cart</h1>
-          <p class="text-[#1A1A1A] font-normal text-medium">{{ getTotalCartPrice.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          }) }}</p>
-        </div>
       </NuxtLink>
     </div>
   </header>

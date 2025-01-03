@@ -66,7 +66,7 @@ const buttonStyle = computed(() =>
 </script>
 
 <template>
-  <button @click="props.onClick" class="icon-container justify-center items-center flex">
+  <button @click="props.onClick && props.onClick()" class="icon-container justify-center items-center flex">
     <img :src="icon" :alt="icon" :class="buttonStyle" />
   </button>
 </template>

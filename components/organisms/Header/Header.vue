@@ -36,7 +36,7 @@ const handleSearchProduct = (payload: Event) => {
       </button>
     </form>
     <div class="flex flex-row gap-4">
-      <NuxtLink class="flex flex-row  relative items-center" href="/">
+      <NuxtLink class="flex flex-row  relative items-center" href="/whitelist">
         <img src="~/assets/icons/heart-icon.svg" alt="Cart Icon" class="h-8 w-8" />
         <p
           class="absolute -top-1 w-6 h-6 -right-2 flex items-center justify-center bg-green-500 font-light text-xs text-white rounded-full border-2 border-white">

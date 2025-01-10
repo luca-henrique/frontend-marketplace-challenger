@@ -21,7 +21,6 @@ type ItemSize = keyof typeof cardSize
 
 type Brand = typeof cardSize[ItemSize];
 
-
 const storeAction = store()
 
 const { addProductWhiteList, addProductCart } =
@@ -35,28 +34,36 @@ const props = defineProps<{
   title?: string;
   price?: number;
   rating?: number;
+  promotion?: number;
   addWhitelist?: () => void;
   addCart?: () => void;
   onChangeNavigation?: () => void;
   promotionType?: PromotionTypeProps;
   size?: ItemSize
+  id: number
+  image: string;
+  stock: number;
 }>();
 
 // Atribuindo valores padrão caso não sejam passados
+const id = props.id
 const title = props.title || "Chanise Cabbage";
 const price = props.price || 10;
 const rating = props.rating || 3.5;
 const size = props.size ? getCardSize(props.size) : getCardSize('small')
-
+const promotion = props.promotion
+const image = props.image
+const stock = props.stock
 
 const product = {
-  id: new Date().getTime(),
-  name: '',
-  price: 1100.0,
-  quantity: 10,
-  image: ''
+  id,
+  title,
+  price,
+  rating,
+  promotion,
+  image,
+  stock
 }
-
 </script>
 
 
@@ -64,7 +71,7 @@ const product = {
   <div
     class=" flex flex-col border-2 border-[#E6E6E6] hover:border-[#2C742F] relative shadow-md rounded-lg h-full cursor-pointer"
     :class="size" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
-    <img :class="size" :src="FruitImg" alt="fruit" class="h-full object-contain mt-1" />
+    <nuxt-img :class="size" :src="props.image" alt="fruit" class="h-full object-contain mt-1" lazy />
     <div class="flex flex-row justify-between  p-4">
       <div class="flex flex-col gap-1">
         <h5 :class="{
@@ -73,7 +80,7 @@ const product = {
         }">
           {{ title }}
         </h5>
-        <PriceText :price="price" :promotion="5" />
+        <PriceText :price="price" :promotion="promotion" />
         <StarRatings :starSize="16" starColor="#FF8A00" inactiveColor="#CCCCCC" :numberOfStars="5" v-model="rating"
           :disableClick="false" />
       </div>

@@ -38,5 +38,3 @@ const isCheckoutRouter = computed(() => route.path === '/checkout');
     </div>
   </header>
 </template>
-
-<style scoped lang="css"></style>

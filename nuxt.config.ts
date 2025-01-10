@@ -7,11 +7,8 @@ export default defineNuxtConfig({
     css: "/<rootDir>/styles",
   },
 
-  modules: [
-    "@pinia/nuxt", // required
-    "pinia-plugin-persistedstate/nuxt",
-    "@nuxtjs/tailwindcss",
-  ],
+  modules: [// required
+  "@pinia/nuxt", "pinia-plugin-persistedstate/nuxt", "@nuxtjs/tailwindcss", "@nuxt/image"],
 
   tailwindcss: {
     exposeConfig: true,

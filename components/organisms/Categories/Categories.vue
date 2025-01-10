@@ -18,11 +18,10 @@ const { data, status, error } = await useFetch<Category[]>('http://localhost:333
   <section class="flex flex-col justify-center items-center py-[40px]">
     <div class="w-[1300px]">
       <SectionHeader title="Categorias populares" path="products" />
-      <div v-if="status">Carregando...</div>
-      <div v-else-if="error">Erro ao carregar categorias: {{ error.message }}</div>
+      <div v-if="error">Erro ao carregar categorias: {{ error.message }}</div>
       <div class="flex flex-row mt-4 flex-wrap gap-5">
-        <div v-for="(item, index) in data" :key="index">
-          <CardCategory :image="item.image" :name="item.name" :path="item.path" />
+        <div v-for="(item, index) in data.data" :key="index">
+          <CardCategory :image="item.image" :name="item.name" :path="`products/${item.path}`" />
         </div>
       </div>
     </div>

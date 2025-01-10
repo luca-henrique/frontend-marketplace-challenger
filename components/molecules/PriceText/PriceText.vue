@@ -29,8 +29,6 @@ const formatMoney = (value: number) => {
 
 const { promotion, price = 0, size = 'small' } = props
 
-console.log(size)
-
 
 const sizeStyle = computed(() =>
   `${getButtonSize(size)}`

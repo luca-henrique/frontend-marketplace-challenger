@@ -39,5 +39,5 @@ const { name, color } = getBrandDetails(brandType)
 </script>
 
 <template>
-  <div :style="{ backgroundColor: color }" class="px-2 py-1 shadow-md rounded-md text-white">{{ name }}</div>
+  <div :style="{ backgroundColor: color }" class="w-fit px-2 py-1 shadow-md rounded-md text-white">{{ name }}</div>
 </template>

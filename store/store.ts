@@ -2,10 +2,13 @@ import { defineStore } from "pinia";
 
 interface Product {
   id: number;
-  name: string;
+  title: string;
   price: number;
   quantity: number;
   image: string;
+  rating: number;
+  promotion: number;
+  stock: number;
 }
 
 interface OrderProduct {
@@ -34,12 +37,14 @@ export const store = defineStore("store", {
   }),
   getters: {
     getCart: (state) => state.cart,
+    getWhiteList: (state) => state.whitheList,
     getTotal: (state) => state.total,
     getProducts: (state) => state.products,
     getToken: (state) => state.token,
     getTotalWhiteList: (state) => state.whitheList.length,
     getTotalCart: (state) => state.cart.length,
-    getTotalCartPrice: (state) => state.cart.length,
+    getTotalCartPrice: (state) =>
+      state.cart.reduce((acc, item) => acc + item.price, 0),
   },
   actions: {
     addProductCart(payload: Product) {
@@ -68,7 +73,7 @@ export const store = defineStore("store", {
 
       this.total += payload.price;
     },
-    removeProductCart(productId: number) {
+    decrementProductCart(productId: number) {
       const findProduct = this.cart.find((product) => product.id === productId);
 
       if (!findProduct) {
@@ -85,6 +90,31 @@ export const store = defineStore("store", {
       } else {
         this.cart = this.cart.filter((product) => product.id !== productId);
       }
+
+      const products = this.getCart.map((item) => {
+        return {
+          id_product: item.id,
+          quantity: item.quantity,
+        };
+      });
+
+      this.products = products;
+
+      this.total -= findProduct.price;
+
+      if (this.total < 0) {
+        this.total = 0;
+      }
+    },
+    removeProductCart(productId: number) {
+      const findProduct = this.cart.find((product) => product.id === productId);
+
+      if (!findProduct) {
+        console.warn("Produto não encontrado no carrinho");
+        return;
+      }
+
+      this.cart = this.cart.filter((product) => product.id !== productId);
 
       const products = this.getCart.map((item) => {
         return {
@@ -134,7 +164,6 @@ export const store = defineStore("store", {
 
     addProductWhiteList(payload: Product) {
       console.log(payload);
-
       const findProduct = this.whitheList.find(
         (product) => product.id === payload.id
       );
@@ -142,6 +171,38 @@ export const store = defineStore("store", {
       if (!findProduct) {
         this.whitheList = [...this.whitheList, { ...payload, quantity: 1 }];
       }
+    },
+
+    removeProductWhiteList(productId: number) {
+      const findProduct = this.whitheList.find(
+        (product) => product.id === productId
+      );
+
+      if (!findProduct) {
+        console.warn("Produto não encontrado no carrinho");
+        return;
+      }
+
+      this.whitheList = this.whitheList.filter(
+        (product) => product.id !== productId
+      );
+    },
+
+    parseProductWhiteListToCart(payload: Product) {
+      const findProduct = this.whitheList.find(
+        (product) => product.id === payload.id
+      );
+
+      if (!findProduct) {
+        console.warn("Produto não encontrado no carrinho");
+        return;
+      }
+
+      this.whitheList = this.whitheList.filter(
+        (product) => product.id !== findProduct.id
+      );
+
+      this.addProductCart(findProduct);
     },
   },
   persist: true,

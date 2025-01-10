@@ -4,6 +4,8 @@ import shoppingBag from "~/assets/icons/bag-outlined-icon.svg"
 import heart from "~/assets/icons/heart-icon.svg"
 import eye from "~/assets/icons/eye-icon.svg"
 import close from "~/assets/icons/close-icon.svg"
+import minus from "~/assets/icons/minus-icon.svg"
+import plus from "~/assets/icons/plus-icon.svg"
 
 type ItemSize = "small" | "medium" | "large";
 type ButtonType = "outlined" | "contained" | "containedSecondary" | "thierdContained" | 'outlinedSeconary';
@@ -11,7 +13,11 @@ type ButtonType = "outlined" | "contained" | "containedSecondary" | "thierdConta
 
 const icons = {
   shoppingBag,
-  heart, eye, close
+  heart,
+  eye,
+  close,
+  minus,
+  plus
 } as const;
 
 type IconKey = keyof typeof icons

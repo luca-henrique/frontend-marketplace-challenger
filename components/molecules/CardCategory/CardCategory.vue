@@ -10,7 +10,7 @@ const { image, name, path } = defineProps<{
 </script>
 
 <template>
-  <NuxtLink :href="path"
+  <NuxtLink :href="`${path}?limit=6&page=1&orderBy=asc`"
     class="border max-w-[200px] border-[#E6E6E6] px-1 py-4 flex flex-col justify-center items-center rounded-md hover:border-[#2C742F] cursor-pointer ">
     <img :src="image" alt="category" lazy />
     <h5 class="text-[#1A1A1A] font-medium text-lg mt-4">{{ name }}</h5>

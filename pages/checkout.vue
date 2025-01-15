@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-
+import Button from "~/components/atoms/Button/Button.vue";
 
 import { store } from "~/store/store";
 import { ref } from "vue";
@@ -8,11 +8,12 @@ const storeCart = store();
 const selectedOption = ref("");
 const paymentOption = ref("");
 
-const { removeProductCart, products, incrementProductCart, resetCart } =
+const { products, resetCart } =
   storeCart;
 
-const { getTotal, getCart, getToken } = storeToRefs(storeCart);
+const { getCart, getToken, getTotal } = storeToRefs(storeCart);
 const router = useRouter();
+
 
 const handleSubmitOrder = async () => {
   try {
@@ -36,7 +37,7 @@ const handleSubmitOrder = async () => {
       throw new Error(`Erro na requisição: ${response.statusText}`);
     }
 
-    
+
     router.push("/");
 
     resetCart();
@@ -46,272 +47,144 @@ const handleSubmitOrder = async () => {
   }
 };
 
-const response = await fetch("http://localhost:3333/address-by-user", {
+const response = await fetch("http://localhost:3333/api/address-by-user", {
   headers: {
     Authorization:
-    `Bearer ${getToken.value}`,
+      `Bearer ${getToken.value}`,
   },
 });
 
-const { address } = await response.json();
+const data = await response.json();
 
-import Header from '~/components/molecules/Header/Header.vue';
+
+
 </script>
 
 <template>
-  <div class="container">
-    <Header />
-    <div class="content">
-      <div class="flex flex-row items-center header-title">
-        <h1>Shopping Cart</h1>
-      </div>
-      <div class="flex flex-row justify-end items-center cart-information">
-        <i class="bx bx-shopping-bag"></i>
-        <h6 class="cart-information">{{ getCart.length }} items</h6>
-      </div>
-      <div class="cart-list" v-for="item in getCart" :key="item.id">
-        <div class="cart-card items-center justify-between">
-          <div class="flex flex-row items-center">
-            <img class="img" :src="item.image" alt="img" />
-            <h4 class="title">
-              {{ item.name }}
-            </h4>
+  <div class="flex flex-col items-center h-full py-10">
+    <div class="flex flex-row gap-6">
+      <div class="w-[872px] flex flex-col">
+        <h4 class="text-[#1A1A1A] font-bold text-xl">
+          Informações de pagamento</h4>
+
+
+        <h3>Escolha um endereço:</h3>
+        <div class="flex flex-col w-full" v-for="location in data.address" :key="location.id">
+          <div class="flex flex-col border border-[#E6E6E6] rounded-[6px] p-4 gap-4 mb-4">
+            <div class="flex flex-row items-center w-full">
+              <input type="radio" v-model="selectedOption" required :value="location.id" />
+
+            </div>
+            <div class="flex flex-row gap-2">
+              <div class="flex flex-col w-full">
+                <label for="cep" class="mb-2">Cep</label>
+                <input id="cep" :value="location.zipCode" type="text" disabled
+                  class="border border-[#E6E6E6] rounded-[8px] h-[21px] p-6" />
+              </div>
+              <div class="flex flex-col w-full">
+                <label for="cep" class="mb-2">Numero</label>
+                <input id="cep" :value="location.number" type="text" disabled
+                  class="border border-[#E6E6E6] rounded-[8px] h-[21px] p-6" />
+              </div>
+              <div class="flex flex-col w-full">
+                <label for="cep" class="mb-2">Rua</label>
+                <input id="cep" :value="location.address" type="text" disabled
+                  class="border border-[#E6E6E6] rounded-[8px] h-[21px] p-6" />
+              </div>
+            </div>
+
+            <div class="flex flex-row gap-2">
+              <div class="flex flex-col w-full">
+                <label for="cep" class="mb-2">Cidade</label>
+                <input id="cep" :value="location.city" type="text" disabled
+                  class="border border-[#E6E6E6] rounded-[8px] h-[21px] p-6" />
+              </div>
+              <div class="flex flex-col w-full">
+                <label for="cep" class="mb-2">UF</label>
+                <input id="cep" :value="location.uf" type="text" disabled
+                  class="border border-[#E6E6E6] rounded-[8px] h-[21px] p-6" />
+              </div>
+
+              <div class="flex flex-col w-full">
+                <label for="cep" class="mb-2">Bairro</label>
+                <input id="cep" :value="location.neighborhood" type="text" disabled
+                  class="border border-[#E6E6E6] rounded-[8px] h-[21px] p-6" />
+              </div>
+            </div>
           </div>
-          <div class="flex flex-row items-center gap-2">
-            <button
-              class="btn-control-quantity"
-              @click="incrementProductCart(item.id)"
-            >
-              <i class="bx bx-plus"></i>
-            </button>
-            <p>
-              {{ item.quantity }}
-            </p>
-            <button
-              class="btn-control-quantity"
-              @click="removeProductCart(item.id)"
-            >
-              <i class="bx bx-minus"></i>
-            </button>
-            <p>
-              {{
-                item.price.toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })
-              }}
-            </p>
+        </div>
+      </div>
+      <div class="flex flex-col border border-[#E6E6E6] rounded-[6px] w-[424px] p-6">
+        <h4 class="text-[#1A1A1A] font-bold text-xl">Resumo do pedido</h4>
+        <div v-for="item in getCart" :key="item.id">
+          <div class="flex flex-row items-center justify-between">
+            <div class="flex flex-row items-center">
+              <img class="w-[60px] h-[60px]" :src="item.image" alt="img" />
+              <h4 class="title">
+                {{ item.title }}
+              </h4>
+            </div>
+            <div class="flex flex-row items-center gap-2">
+
+              <p>
+                x{{ item.quantity }}
+              </p>
+
+              <p>
+                {{
+                  item.price.toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL",
+                  })
+                }}
+              </p>
+            </div>
           </div>
         </div>
+        <div class="flex flex-row justify-between items-center py-3 border-b border-b-[#E6E6E6]">
+          <h4 class="text-[#4D4D4D]">Subtotal:</h4>
+          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotal.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }) }}</h4>
+        </div>
+        <div class="flex flex-row justify-between items-center py-3 border-b border-b-[#E6E6E6]">
+          <h4 class="text-[#4D4D4D]">Entrega:</h4>
+          <h4 class="text-[#1A1A1A] font-bold text-sm">Gratis</h4>
+        </div>
+        <div class="flex flex-row justify-between items-center py-3 ">
+          <h4 class="text-[#4D4D4D]">Total:</h4>
+          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotal.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }) }}</h4>
+        </div>
+        <div class="flex flex-col my-2 gap-1">
+          <h3 class="text-[#1A1A1A] font-bold text-xl">Metodo do pagamento:</h3>
+
+          <label>
+            <input type="radio" value="CREDIT_CARD" v-model="paymentOption" />
+            Cartão de credito
+          </label>
+
+          <label>
+            <input type="radio" value="PIX" v-model="paymentOption" />
+            PIX
+          </label>
+
+
+          <label>
+            <input type="radio" value="DEBIT_CARD" v-model="paymentOption" />
+            Cartão de debito
+          </label>
+
+          <label>
+            <input type="radio" value="CASH" v-model="paymentOption" />
+            Dinheiro
+          </label>
+        </div>
+        <Button sizeType="medium" text="Fazer pedido" @click="handleSubmitOrder()" />
       </div>
-      <h3>Escolha um endereço:</h3>
-      <div
-        class="cart-list flex flex-row justify-between"
-        v-for="location in address"
-        :key="location.id"
-      >
-        <div class="flex flex-row items-center gap-2">
-          <h5 class="label">
-            {{ location.zipCode }}
-          </h5>
-          <h5 class="label">
-            {{ location.address }}
-          </h5>
-          <h5 class="label">{{ location.city }} / {{ location.uf }}</h5>
-
-          <input
-            type="radio"
-            v-model="selectedOption"
-            required
-            :value="location.id"
-          />
-        </div>
-      </div>
-
-      <div>
-        <h3>Escolha uma opção para o pagamento:</h3>
-
-        <label>
-          <input type="radio" value="CREDIT_CARD" v-model="paymentOption" />
-          Cartão de credito
-        </label>
-
-        <label>
-          <input type="radio" value="PIX" v-model="paymentOption" />
-          PIX
-        </label>
-
-        <label>
-          <input type="radio" value="INVOICE" v-model="paymentOption" />
-          Boleto
-        </label>
-
-        <label>
-          <input type="radio" value="DEBIT_CARD" v-model="paymentOption" />
-          Cartão de debito
-        </label>
-
-        <label>
-          <input type="radio" value="CASH" v-model="paymentOption" />
-          Dinheiro
-        </label>
-      </div>
-
-      <div class="order-summary">
-        <h3>Order Summary</h3>
-        <div class="flex flex-row justify-between">
-          <h5 class="label">Item total</h5>
-          <h5 class="label">
-            {{
-              getTotal.toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })
-            }}
-          </h5>
-        </div>
-        <div class="flex flex-row justify-between">
-          <h5 class="label">Transporte</h5>
-          <h5 class="label">
-            {{
-              Number(10).toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })
-            }}
-          </h5>
-        </div>
-        <div class="flex flex-row justify-between">
-          <h5 class="label">Discontos</h5>
-          <h5 class="label">
-            {{
-              Number(10).toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })
-            }}
-          </h5>
-        </div>
-        <div class="flex flex-row justify-between">
-          <h5 class="label">Total</h5>
-          <h5 class="label">
-            {{
-              (getTotal + 10 + 10).toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })
-            }}
-          </h5>
-        </div>
-      </div>
-
-      <button :class="getCart.length == 0 ? 'disabled' : ''" class="btn-checkout" @click="handleSubmitOrder()" :disabled="getCart.length == 0">
-        Finalizar compra
-      </button>
     </div>
   </div>
 </template>
-
-<style scoped>
-button {
-  border: none;
-  background-color: transparent;
-}
-
-.order-summary {
-  display: flex;
-  flex-direction: column;
-  background-color: #ebebeb;
-  margin-bottom: 40px;
-  padding: 10px;
-  gap: 8px;
-}
-
-.order-summary .label {
-  font-weight: 400;
-  color: #8f8f8f;
-}
-
-.disabled{
-  background-color: #d0d0d0 !important;
-}
-
-.label {
-  font-weight: 400;
-  color: #8f8f8f;
-}
-
-.justify-end {
-  justify-content: flex-end;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.cart-information {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.cart-list {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 40px;
-}
-
-.cart-information i {
-  margin-right: 8px;
-}
-
-.header-title {
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
-
-.content {
-  width: 80%;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.cart-card {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid #f4f4f4;
-  padding: 10px;
-}
-
-.cart-card img {
-  width: 100px;
-}
-
-.cart-card .title {
-  font-weight: 400;
-  color: #8e8e8e;
-  margin-left: 8px;
-}
-
-.btn-control-quantity {
-  border: none;
-  background-color: transparent;
-}
-
-.btn-checkout {
-  background-color: #5dade2;
-  border: none;
-  color: #f4f4f4;
-  padding: 18px;
-  width: 100%;
-  font-size: 14px;
-  font-weight: bold;
-}
-</style>

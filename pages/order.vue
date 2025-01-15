@@ -5,15 +5,21 @@ import { store } from "~/store/store";
 
 const storeCart = store();
 
-const { getCart, getTotalCartPrice } = storeToRefs(storeCart);
+const { getCart, getTotal } = storeToRefs(storeCart);
 
 const { incrementProductCart, removeProductCart, decrementProductCart } = storeCart
+
+const { replace } = useRouter()
+
+const handleRouter = () => {
+  replace({ path: "/checkout" })
+}
 
 </script>
 
 <template>
   <div class="flex flex-col items-center h-full">
-    <h1 class="text-[#1A1A1A] font-extrabold">My Shopping Cart</h1>
+    <h1 class="text-[#1A1A1A] font-extrabold text-4xl my-7">Meu carrinho de compras</h1>
     <div class="flex flex-row gap-4 my-14">
       <div class="w-[872px] flex flex-col border border-[#E6E6E6] rounded-[8px] ">
         <div class="flex flex-row p-4">
@@ -64,7 +70,7 @@ const { incrementProductCart, removeProductCart, decrementProductCart } = storeC
         <h4 class="text-[#1A1A1A] font-bold text-xl">Total</h4>
         <div class="flex flex-row justify-between items-center py-3 border-b border-b-[#E6E6E6]">
           <h4 class="text-[#4D4D4D]">Subtotal:</h4>
-          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotalCartPrice.toLocaleString("pt-BR", {
+          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotal.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           }) }}</h4>
@@ -75,12 +81,12 @@ const { incrementProductCart, removeProductCart, decrementProductCart } = storeC
         </div>
         <div class="flex flex-row justify-between items-center py-3 py-3  mb-3">
           <h4 class="text-[#4D4D4D]">Total:</h4>
-          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotalCartPrice.toLocaleString("pt-BR", {
+          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotal.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           }) }}</h4>
         </div>
-        <Button sizeType="medium" text="Finalizar compra" />
+        <Button sizeType="medium" text="Finalizar compra" :onClick="() => handleRouter()" />
       </div>
     </div>
   </div>

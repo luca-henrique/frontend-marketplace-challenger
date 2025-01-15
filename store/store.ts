@@ -4,10 +4,10 @@ interface Product {
   id: number;
   title: string;
   price: number;
-  quantity: number;
+  quantity?: number;
   image: string;
   rating: number;
-  promotion: number;
+  promotion?: number;
   stock: number;
 }
 
@@ -25,6 +25,7 @@ interface State {
   products: OrderProducts[];
   token: string;
   whitheList: Product[];
+  search: string;
 }
 
 export const store = defineStore("store", {
@@ -32,8 +33,9 @@ export const store = defineStore("store", {
     cart: [],
     total: 0,
     products: [],
-    token: "",
+    token: process.server ? "" : localStorage.getItem("token") ?? "",
     whitheList: [],
+    search: "",
   }),
   getters: {
     getCart: (state) => state.cart,
@@ -47,6 +49,9 @@ export const store = defineStore("store", {
       state.cart.reduce((acc, item) => acc + item.price, 0),
   },
   actions: {
+    setQuery(newQuery: string) {
+      this.search = newQuery;
+    },
     addProductCart(payload: Product) {
       const findProduct = this.cart.find(
         (product) => product.id === payload.id
@@ -163,7 +168,6 @@ export const store = defineStore("store", {
     },
 
     addProductWhiteList(payload: Product) {
-      console.log(payload);
       const findProduct = this.whitheList.find(
         (product) => product.id === payload.id
       );

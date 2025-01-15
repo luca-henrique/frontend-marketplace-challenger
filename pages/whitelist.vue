@@ -13,9 +13,9 @@ const { removeProductWhiteList, parseProductWhiteListToCart } = storeCart
 
 <template>
   <div class="flex flex-col items-center h-full">
-    <h1 class="text-[#1A1A1A] font-extrabold">My Shopping Cart</h1>
-    <div class="flex flex-col gap-4 my-14 w-[1320px]">
-      <div class="flex flex-col border border-[#E6E6E6] rounded-[8px] ">
+    <h1 class="text-[#1A1A1A] font-extrabold text-4xl my-7">Whitelist</h1>
+    <div class="flex flex-col gap-4 mb-14 w-[1320px]">
+      <div class="flex flex-col border border-[#E6E6E6] rounded-[8px]">
         <div class="flex flex-row p-5 w-full ">
           <h5 class="text-[#808080] text-sm font-medium uppercase w-[460px]">Produto</h5>
           <h5 class="text-[#808080] text-sm font-medium uppercase w-[336px]">Preço</h5>

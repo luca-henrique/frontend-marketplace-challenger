@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import FruitImg from "~/assets/images/image.png"
 import StarRatings from "vue3-star-ratings"
 import IconButton from "~/components/atoms/IconButton/IconButton.vue";
 import Brand from "~/components/atoms/Brand/Brand.vue";
@@ -15,6 +14,12 @@ const cardSize = {
   large: "w-[312px]",
 }
 
+const imageSize = {
+  small: "w-[246px] h-[246px]",
+  medium: "w-[254px] h-[230px]",
+  large: "w-[302px] h-[302px]",
+}
+
 type PromotionTypeProps = 'sale' | 'new' | 'bestSale' | 'outStock'
 
 type ItemSize = keyof typeof cardSize
@@ -27,6 +32,10 @@ const { addProductWhiteList, addProductCart } =
   storeAction;
 
 function getCardSize(key: ItemSize): Brand {
+  return cardSize[key];
+}
+
+function getCardImageSize(key: ItemSize): Brand {
   return cardSize[key];
 }
 
@@ -51,6 +60,7 @@ const title = props.title || "Chanise Cabbage";
 const price = props.price || 10;
 const rating = props.rating || 3.5;
 const size = props.size ? getCardSize(props.size) : getCardSize('small')
+const imageSizeType = props.size ? getCardImageSize(props.size) : getCardImageSize('small')
 const promotion = props.promotion
 const image = props.image
 const stock = props.stock
@@ -71,7 +81,7 @@ const product = {
   <div
     class=" flex flex-col border-2 border-[#E6E6E6] hover:border-[#2C742F] relative shadow-md rounded-lg h-full cursor-pointer"
     :class="size" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
-    <nuxt-img :class="size" :src="props.image" alt="fruit" class="h-full object-contain mt-1" lazy />
+    <nuxt-img :class="imageSizeType" :src="props.image" alt="fruit" class="h-full object-contain mt-1" lazy />
     <div class="flex flex-row justify-between  p-4">
       <div class="flex flex-col gap-1">
         <h5 :class="{

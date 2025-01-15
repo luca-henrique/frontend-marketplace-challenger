@@ -10,7 +10,9 @@ interface Category {
   path: string
 }
 
-const { data, status, error } = await useFetch<Category[]>('http://localhost:3333/api/category');
+
+
+const { data, error } = await useFetch<any[]>('http://localhost:3333/api/category');
 
 </script>
 

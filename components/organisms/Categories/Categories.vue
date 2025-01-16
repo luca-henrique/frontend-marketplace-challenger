@@ -22,8 +22,8 @@ const { data, error } = await useFetch<any[]>('http://localhost:3333/api/categor
       <SectionHeader title="Categorias populares" path="products" />
       <div v-if="error">Erro ao carregar categorias: {{ error.message }}</div>
       <div class="flex flex-row mt-4 flex-wrap gap-5">
-        <div v-for="(item, index) in data.data" :key="index">
-          <CardCategory :image="item.image" :name="item.name" :path="`products/${item.path}`" />
+        <div v-for="({ item }, index) in data.data" :key="index">
+          <CardCategory :image="item.image" :name="item.name" :path="`${item.path}`" />
         </div>
       </div>
     </div>

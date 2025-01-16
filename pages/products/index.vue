@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import CardProductVertical from '~/components/molecules/CardProductVertical/CardProductVertical.vue';
-import Button from '~/components/atoms/Button/Button.vue';
+import CardProductVertical from "~/components/molecules/CardProductVertical/CardProductVertical.vue";
+import Button from "~/components/atoms/Button/Button.vue";
 
-import { ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import HeaderFilterProduct from "~/components/molecules/HeaderFilterProduct/HeaderFilterProduct.vue";
+import OptionSearchProductByCategory from "~/components/molecules/OptionSearchProductByCategory/OptionSearchProductByCategory.vue";
+
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 interface Product {
   id: number;
@@ -38,29 +41,39 @@ const pagination = ref<Pagination>({
   perPage: 6,
   currentPage: parseInt(route.query.page as string) || 1,
   lastPage: 0,
-  nextPageUrl: '',
-  previousPageUrl: '',
+  nextPageUrl: "",
+  previousPageUrl: "",
 });
 
+const minPrice = ref(Number(route.query.minPrice) || 0);
+const maxPrice = ref(Number(route.query.maxPrice) || 1000);
 
 const fetchProducts = async () => {
-
   loading.value = true;
 
+
+
+  const category = route.query.category || "";
+  const search = route.query.search || "";
   const page = route.query.page || 1;
   const limit = route.query.limit || 6;
-  const orderBy = route.query.orderBy || 'asc';
-  const search = route.query.search || ''
+  const orderBy = route.query.orderBy || "asc";
 
   try {
-    const { data, error } = await useFetch<Response>(`http://localhost:3333/product`, {
-      query: {
-        page,
-        limit,
-        orderBy,
-        search,
-      },
-    });
+    const { data, error } = await useFetch<Response>(
+      `http://localhost:3333/product`,
+      {
+        query: {
+          page,
+          limit,
+          orderBy,
+          search,
+          category,
+          minPrice: minPrice.value,
+          maxPrice: maxPrice.value,
+        },
+      }
+    );
 
     if (data.value) {
       products.value = data.value.data || [];
@@ -75,15 +88,12 @@ const fetchProducts = async () => {
       };
     }
     return { products: products.value, error };
-
   } catch (error) {
-    console.error('Erro ao buscar produtos:', error);
+    console.error("Erro ao buscar produtos:", error);
   } finally {
     loading.value = false;
   }
-
 };
-
 
 
 const handlePageChange = (newPage: number) => {
@@ -97,9 +107,6 @@ const handlePageChange = (newPage: number) => {
   });
 };
 
-
-
-
 const changeLimit = (limit: number) => {
   router.push({ query: { ...route.query, limit, page: 1 } }); // Redefine a página para 1 ao alterar o limite
 };
@@ -108,8 +115,35 @@ const changeOrderBy = (orderBy: string) => {
   router.push({ query: { ...route.query, orderBy, page: 1 } }); // Redefine a página para 1 ao alterar a ordenação
 };
 
+
 watch(() => route.query, fetchProducts, { immediate: true });
 
+
+
+// Função de debounce
+let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
+const debounceUpdateRoute = (callback: () => void, delay = 500) => {
+  if (debounceTimeout) clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(callback, delay);
+};
+
+const validatePrices = () => {
+  if (minPrice.value > maxPrice.value) {
+    minPrice.value = maxPrice.value;
+  }
+};
+
+watch([minPrice, maxPrice], ([newMin, newMax]) => {
+  debounceUpdateRoute(() => {
+    router.push({
+      query: {
+        ...route.query,
+        minPrice: newMin,
+        maxPrice: newMax,
+      },
+    });
+  });
+});
 
 </script>
 
@@ -120,45 +154,24 @@ watch(() => route.query, fetchProducts, { immediate: true });
     </div>
     <div class="flex flex-row w-[1320px] gap-4 my-6">
       <div class="flex flex-col w-[312px]">
-        <Button text="Filtrar" />
-        <div>
-          <fieldset id="group1">
-            <div class="inline-flex items-center">
-              <label class="relative flex items-center cursor-pointer" for="html">
-                <input name="framework" type="radio"
-                  class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-[#000] checked:border-[#00B207] transition-all"
-                  id="html">
-                <span
-                  class="absolute bg-[#00B207] w-3 h-3 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                </span>
-              </label>
-              <label class="ml-2 text-slate-600 cursor-pointer text-sm" for="html">HTML(10)</label>
-            </div>
-          </fieldset>
+        <OptionSearchProductByCategory />
+        <div class="flex flex-col  border-b py-4">
+          <h5 class="mb-2">Preços</h5>
+          <div class="flex flex-col gap-2">
+            <label class="text-sm text-[#1A1A1A]" for="minPrice">Min.</label>
+            <input id="minPrice" type="number" v-model="minPrice"
+              class="border border-[#E6E6E6] rounded-[8px] h-[21px] p-5" @blur="validatePrices" />
+          </div>
+          <div class="flex flex-col">
+            <label for="maxPrice" class="text-sm text-[#1A1A1A]">Max.</label>
+            <input id="maxPrice" type="number" class="border border-[#E6E6E6] rounded-[8px] h-[21px] p-5"
+              v-model="maxPrice" @blur="validatePrices" />
+          </div>
         </div>
       </div>
-      <div class="flex flex-col w-full">
-        <div class="flex flex-row justify-between mb-4">
-          <div class="limit-selector">
-            <label for="limit">Itens por página:</label>
-            <select id="limit" :value="pagination.perPage" @change="changeLimit(Number($event.target.value))">
-              <option value="6">6</option>
-              <option value="12">12</option>
-              <option value="18">18</option>
-            </select>
-          </div>
-          <div>
-            <select type="select" :value="route.query.orderBy || 'asc'" @change="changeOrderBy($event.target.value)"
-              class="border-2 border-[#E6E6E6] rounded-lg p-2 w-[140px]">
-              <option value="asc">Menor preço</option>
-              <option value="desc">Maior preço</option>
-            </select>
-          </div>
+      <div class="flex flex-col w-[984px]">
 
-          <div>
-            <h5>{{ products.length }} produtos</h5>
-          </div>
-        </div>
+        <HeaderFilterProduct :perPage="pagination.perPage" :totalProducts="products.length" />
         <div v-if="loading">Carregando...</div>
         <div class="flex flex-row flex-wrap gap-5" v-else>
           <div v-for="(item, index) in products" :key="index">
@@ -167,15 +180,16 @@ watch(() => route.query, fetchProducts, { immediate: true });
           </div>
         </div>
         <div class="flex flex-row justify-center items-center gap-4 mt-4">
-          <Button :disabled="!pagination.previousPageUrl" @click="handlePageChange(pagination.currentPage - 1)">
-            Anterior
-          </Button>
+          <Button :disabled="!pagination.previousPageUrl" @click="handlePageChange(pagination.currentPage - 1)"
+            text="Anterior" />
 
-          <span>Página {{ pagination.currentPage }} de {{ pagination.lastPage }}</span>
 
-          <Button :disabled="!pagination.nextPageUrl" @click="handlePageChange(pagination.currentPage + 1)">
-            Próxima
-          </Button>
+          <span>Página {{ pagination.currentPage }} de
+            {{ pagination.lastPage }}</span>
+
+          <Button :disabled="!pagination.nextPageUrl" @click="handlePageChange(pagination.currentPage + 1)"
+            text="Proximo" />
+
         </div>
       </div>
     </div>

@@ -21,6 +21,7 @@ interface Pagination {
   perPage: number;
   currentPage: number;
   lastPage: number;
+  page: number;
   nextPageUrl: string;
   previousPageUrl: string;
 }
@@ -43,6 +44,7 @@ const pagination = ref<Pagination>({
   lastPage: 0,
   nextPageUrl: "",
   previousPageUrl: "",
+  page: 0,
 });
 
 const minPrice = ref(Number(route.query.minPrice) || 0);
@@ -50,8 +52,6 @@ const maxPrice = ref(Number(route.query.maxPrice) || 1000);
 
 const fetchProducts = async () => {
   loading.value = true;
-
-
 
   const category = route.query.category || "";
   const search = route.query.search || "";
@@ -107,20 +107,9 @@ const handlePageChange = (newPage: number) => {
   });
 };
 
-const changeLimit = (limit: number) => {
-  router.push({ query: { ...route.query, limit, page: 1 } }); // Redefine a página para 1 ao alterar o limite
-};
-
-const changeOrderBy = (orderBy: string) => {
-  router.push({ query: { ...route.query, orderBy, page: 1 } }); // Redefine a página para 1 ao alterar a ordenação
-};
-
 
 watch(() => route.query, fetchProducts, { immediate: true });
 
-
-
-// Função de debounce
 let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
 const debounceUpdateRoute = (callback: () => void, delay = 500) => {
   if (debounceTimeout) clearTimeout(debounceTimeout);

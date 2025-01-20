@@ -11,7 +11,6 @@ const storeCart = store();
 
 const { getTotalWhiteList, getTotalCart, getToken } = storeToRefs(storeCart);
 
-console.log(route.path);
 
 const handleSearchProduct = (payload: Event) => {
   payload.preventDefault()

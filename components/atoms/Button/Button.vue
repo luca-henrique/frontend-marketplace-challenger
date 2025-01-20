@@ -43,7 +43,7 @@ const buttonType = props.buttonType || "contained";
 const text = props.text || "Default Text";
 
 const buttonStyle = computed(() =>
-  `${getButtonSize(sizeType)} ${getType(buttonType)} ${props.class} rounded-full transition duration-300 font-semibold`
+  `${getButtonSize(sizeType)} ${getType(buttonType)} ${props.class} rounded-full transition duration-300 font-semibold w-full`
 );
 
 </script>

@@ -5,15 +5,16 @@ import { store } from "~/store/store";
 
 const storeCart = store();
 
-const { getCart, getTotal } = storeToRefs(storeCart);
+const { getCart, getTotalCartPrice } = storeToRefs(storeCart);
 
-const { incrementProductCart, removeProductCart, decrementProductCart } = storeCart
+const { addProductCart, removeProductCart, decrementProductCart } = storeCart
 
 const { replace } = useRouter()
 
 const handleRouter = () => {
   replace({ path: "/checkout" })
 }
+
 
 </script>
 
@@ -48,8 +49,7 @@ const handleRouter = () => {
                 <IconButton buttonType="containedSecondary" icon="minus"
                   :onClick="() => decrementProductCart(item.id)" />
                 <h4 class="text-[#1A1A1A] font-medium text-base">{{ item.quantity }}</h4>
-                <IconButton buttonType="containedSecondary" icon="plus"
-                  :onClick="() => incrementProductCart(item.id)" />
+                <IconButton buttonType="containedSecondary" icon="plus" :onClick="() => addProductCart(item)" />
               </div>
             </div>
             <div class="text-[#808080] text-sm font-medium uppercase w-[173px]">
@@ -70,7 +70,7 @@ const handleRouter = () => {
         <h4 class="text-[#1A1A1A] font-bold text-xl">Total</h4>
         <div class="flex flex-row justify-between items-center py-3 border-b border-b-[#E6E6E6]">
           <h4 class="text-[#4D4D4D]">Subtotal:</h4>
-          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotal.toLocaleString("pt-BR", {
+          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotalCartPrice.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           }) }}</h4>
@@ -81,7 +81,7 @@ const handleRouter = () => {
         </div>
         <div class="flex flex-row justify-between items-center py-3 py-3  mb-3">
           <h4 class="text-[#4D4D4D]">Total:</h4>
-          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotal.toLocaleString("pt-BR", {
+          <h4 class="text-[#1A1A1A] font-bold text-sm">{{ getTotalCartPrice.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
           }) }}</h4>

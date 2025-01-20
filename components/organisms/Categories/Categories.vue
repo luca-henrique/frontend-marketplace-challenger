@@ -4,11 +4,7 @@ import CardCategory from '~/components/molecules/CardCategory/CardCategory.vue';
 
 import { useFetch } from '#app';
 
-interface Category {
-  name: string;
-  image: string;
-  path: string
-}
+
 
 
 

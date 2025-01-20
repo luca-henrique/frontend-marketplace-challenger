@@ -22,7 +22,6 @@ const { removeProductWhiteList, parseProductWhiteListToCart } = storeCart
           <h5 class="text-[#808080] text-sm font-medium uppercase w-[200px]">Stock</h5>
         </div>
         <div v-for="(item, index) in getWhiteList" :key="index">
-          {{ console.log(item) }}
           <div class="flex flex-row p-4 items-center border-t border-[#E6E6E6]">
             <div class="text-[#808080] text-sm font-medium uppercase w-[460px]">
               <div class="flex flex-row items-center">

@@ -11,6 +11,10 @@ interface Product {
   stock: number;
 }
 
+interface CartProps extends Product {
+  quantity: number;
+}
+
 interface OrderProduct {
   id_product: number;
   quantity: number;
@@ -20,7 +24,7 @@ interface OrderProduct {
 type OrderProducts = Omit<OrderProduct, "image">;
 
 interface State {
-  cart: Product[];
+  cart: CartProps[];
   total: number;
   products: OrderProducts[];
   token: string;
@@ -46,7 +50,7 @@ export const store = defineStore("store", {
     getTotalWhiteList: (state) => state.whitheList.length,
     getTotalCart: (state) => state.cart.length,
     getTotalCartPrice: (state) =>
-      state.cart.reduce((acc, item) => acc + item.price, 0),
+      state.cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
   },
   actions: {
     setQuery(newQuery: string) {
@@ -146,10 +150,6 @@ export const store = defineStore("store", {
             : product
         );
       }
-
-      this.getCart.forEach((item) => {
-        this.total += item.price;
-      });
     },
 
     resetCart() {

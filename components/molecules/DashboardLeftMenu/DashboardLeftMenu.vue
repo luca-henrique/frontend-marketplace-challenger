@@ -1,19 +1,46 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
+
+
+import DashboardIcon from "~/assets/icons/dashboard-icon.svg"
+import OrderIcon from "~/assets/icons/order-icon.svg"
+import Wishlist from '~/assets/icons/whitelist-icon.svg'
+import ShoppingCart from "~/assets/icons/shopping-cart-icon.svg"
+import SettingsIcon from "~/assets/icons/settings-icon.svg"
+import LogoutIcon from '~/assets/icons/logout-icon.svg'
 
 const route = useRoute();
-const router = useRouter();
 
 const routers = [
   {
     name: 'Dashboard',
     path: '/dashboard',
-    icon: '~/assets/icons/dashboard-icon.svg',
+    icon: DashboardIcon,
+  },
+  {
+    name: 'Order History',
+    path: '/dashboard/orders',
+    icon: OrderIcon,
+  },
+  {
+    name: 'Wishlist',
+    path: '/dashboard/wishlist',
+    icon: Wishlist,
+  },
+  {
+    name: 'Carrinho',
+    path: '/dashboard/cart',
+    icon: ShoppingCart,
   },
   {
     name: 'Configurações',
-    path: '/dashboard/orders',
-    icon: '~/assets/icons/settings-icon.svg',
+    path: '/dashboard/settings',
+    icon: SettingsIcon,
+  },
+  {
+    name: 'Sair',
+    path: '/',
+    icon: LogoutIcon,
   },
 ]
 

@@ -7,7 +7,9 @@ import Footer from "~/components/organisms/Footer/Footer.vue";
 <template>
   <div>
     <Header />
-    <slot />
+    <div>
+      <slot />
+    </div>
     <Footer />
   </div>
 </template>

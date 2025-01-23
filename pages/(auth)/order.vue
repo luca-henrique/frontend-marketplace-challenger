@@ -27,7 +27,7 @@ const handleRouter = () => {
           <h5 class="text-[#808080] text-sm font-medium uppercase w-[383px]">Produto</h5>
           <h5 class="text-[#808080] text-sm font-medium uppercase w-[114px]">Preço</h5>
           <h5 class="text-[#808080] text-sm font-medium uppercase w-[186px]">Quantidade</h5>
-          <h5 class="text-[#808080] text-sm font-medium uppercase w-[173px]">Subtotla</h5>
+          <h5 class="text-[#808080] text-sm font-medium uppercase w-[173px]">Subtotal</h5>
         </div>
         <div v-for="(item, index) in getCart" :key="index">
           <div class="flex flex-row p-4 justify-center items-center border-t border-[#E6E6E6]">

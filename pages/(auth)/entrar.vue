@@ -14,7 +14,6 @@ const { addToken } = store()
 const router = useRouter();
 
 const handleSubmit = async (event: Event) => {
-
   try {
     event.preventDefault();
 
@@ -42,7 +41,7 @@ const handleSubmit = async (event: Event) => {
 
 <template>
   <div class="flex flex-col justify-center items-center bg-[#ededed]">
-    <form @submit="handleSubmit" class="w-[520px] my-32 bg-white flex flex-col p-6 rounded-lg shadow-md">
+    <form @submit="handleSubmit" class="w-[520px] my-32 bg-white flex flex-col p-6 rounded-lg shadow-md gap-4">
       <div class="flex justify-center items-center ">
         <h1 class="font-semibold text-3xl">Entrar</h1>
       </div>
@@ -56,12 +55,18 @@ const handleSubmit = async (event: Event) => {
         <input id="password" v-model="form.password" type="password" placeholder="password"
           class="border border-[#E6E6E6] rounded-[8px] h-[21px] p-6" />
       </div>
-      <div>
-        <h5>Recuperar senha</h5>
+      <div class="flex justify-end items-center w-full">
+        <NuxtLink href="/recuperar-conta">
+          <h5 class="text-[#666666] font-normal text-sm">Recuperar senha</h5>
+        </NuxtLink>
       </div>
       <Button type="submit" text="Entrar" class="button" />
       <div class="flex justify-center items-center">
-        <h5>Não tem uma conta? Registre-se</h5>
+        <h5 class="text-[#666666] font-normal text-sm">Não tem uma conta?
+          <NuxtLink href="/criar-conta" class="text-[#1A1A1A] font-semibold text-sm">
+            Registre-se
+          </NuxtLink>
+        </h5>
       </div>
     </form>
   </div>

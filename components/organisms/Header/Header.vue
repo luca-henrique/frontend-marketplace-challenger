@@ -30,7 +30,7 @@ const handleSearchProduct = (payload: Event) => {
   }
 }
 
-const pathIconUser = getToken.value ? '/dashboard' : '/login';
+const pathIconUser = getToken.value ? '/dashboard' : '/entrar';
 
 </script>
 

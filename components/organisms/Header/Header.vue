@@ -17,10 +17,10 @@ const handleSearchProduct = (payload: Event) => {
   const form = payload.target as HTMLFormElement;
   const input = form.querySelector('input[type="text"]') as HTMLInputElement;
 
-  const isHome = route.path === '/';
+  const isHome = route.path !== '/products';
 
   if (input) {
-    router.push({
+    router.replace({
       path: isHome ? '/products' : route.path,
       query: {
         ...route.query,
@@ -56,7 +56,7 @@ const pathIconUser = getToken.value ? '/dashboard' : '/entrar';
           {{ getTotalWhiteList }}</p>
       </NuxtLink>
 
-      <NuxtLink class="flex flex-row  relative items-center gap-4" href="/order">
+      <NuxtLink class="flex flex-row  relative items-center gap-4" href="/carrinho">
         <img src="~/assets/icons/bag-outlined-icon.svg" alt="Cart Icon" class="h-8 w-8" />
         <p
           class="absolute -top-1 left-5 w-6 h-6  flex items-center justify-center bg-green-500 font-light text-xs text-white  rounded-full border-2 border-white">

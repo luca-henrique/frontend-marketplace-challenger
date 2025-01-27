@@ -7742,6 +7742,11 @@ vue-devtools-stub@^0.1.0:
   resolved "https://registry.npmjs.org/vue-devtools-stub/-/vue-devtools-stub-0.1.0.tgz"
   integrity sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==
 
+vue-loading-overlay@^6.0.6:
+  version "6.0.6"
+  resolved "https://registry.npmjs.org/vue-loading-overlay/-/vue-loading-overlay-6.0.6.tgz"
+  integrity sha512-ZPrWawjCoNKGbCG9z4nePgbs/K9KXPa1j1oAJXP6T8FQho3NO+/chhjx4MLYFzfpwr+xkiQ8SNrV1kUG1bZPAw==
+
 vue-router@^4.4.5, vue-router@latest:
   version "4.5.0"
   resolved "https://registry.npmjs.org/vue-router/-/vue-router-4.5.0.tgz"
@@ -7755,6 +7760,11 @@ vue-star-rating@^2.1.0:
   integrity sha512-LnhuQPi4hkRg7egKls+iqtL1U0RTN2gQkdLsJN7acyynMsSc9epHLzk8McJS+bR0OzfG98zNFq7mxAyuSb/okQ==
   dependencies:
     vue "^3.0.0"
+
+vue-step-progress@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/vue-step-progress/-/vue-step-progress-1.0.2.tgz"
+  integrity sha512-E2dsO3w+UiTYHBZoHwDM3JtNM5B6nxGJBhHw9keqPlLozj8wmlz/xpCFcpBbA0fgXJnSWpVc2eCckh71f5JkIw==
 
 vue-svg-loader@^0.16.0:
   version "0.16.0"

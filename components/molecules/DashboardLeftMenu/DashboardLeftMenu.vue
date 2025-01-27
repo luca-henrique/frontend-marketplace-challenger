@@ -18,23 +18,23 @@ const routers = [
     icon: DashboardIcon,
   },
   {
-    name: 'Order History',
-    path: '/dashboard/orders',
+    name: 'Histórico de pedidos',
+    path: '/dashboard/historico-pedidos',
     icon: OrderIcon,
   },
   {
     name: 'Wishlist',
-    path: '/dashboard/wishlist',
+    path: '/whitelist',
     icon: Wishlist,
   },
   {
     name: 'Carrinho',
-    path: '/dashboard/cart',
+    path: '/carrinho',
     icon: ShoppingCart,
   },
   {
     name: 'Configurações',
-    path: '/dashboard/settings',
+    path: '/dashboard/configuracoes',
     icon: SettingsIcon,
   },
   {
@@ -62,7 +62,7 @@ function isActive(path: string) {
         isActive(route.path)
           ? 'text-[#1A1A1A] text-base font-medium bg-[#EDF2EE] border-l-2 border-[#00B207]'
           : 'text-base font-medium bg-[#fff] text-[#666666]'
-      ]" class="cursor-pointer">
+      ]" class="cursor-pointer my-2">
         <div class="flex flex-row p-2">
           <img :src="route.icon" :alt="route.name" class="mr-2" />
           <NuxtLink :to="route.path">{{ route.name }}</NuxtLink>

@@ -29,7 +29,6 @@ const userLoggedData = async () => {
   }
 }
 
-console.log(user.value)
 
 
 watch(() => null, userLoggedData, { immediate: true });

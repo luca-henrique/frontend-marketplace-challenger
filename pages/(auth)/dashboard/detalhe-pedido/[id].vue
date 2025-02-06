@@ -123,7 +123,6 @@ watch(() => route.params.id, fetchOrders, { immediate: true });
 <template>
   <div v-if="loading">Carregando...</div>
   <div class="flex flex-col border border-[#E6E6E6] rounded-[8px] w-[984px]" v-else>
-    {{ console.log(order) }}
     <div class="flex flex-row border-b border-[#E6E6E6] py-4 px-6  justify-between">
       <div class="flex flex-row  gap-3 items-center">
         <h4 class="text-[#1A1A1A] font-semibold text-xl">Detalhe do pedido</h4>

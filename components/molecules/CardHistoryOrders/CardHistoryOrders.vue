@@ -9,7 +9,6 @@ const loading = ref(false);
 const orders = ref<any[]>([]);
 
 const fetchOrders = async () => {
-  console.log("error")
 
   try {
     const { data, error } = await useFetch<any[]>('http://localhost:3333/order-by-user', {

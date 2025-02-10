@@ -3,7 +3,7 @@ import CardInformationMarket from "~/components/molecules/CardInformationMarket/
 </script>
 
 <template>
-  <section class="flex justify-center items-center mt-4">
+  <section class="flex justify-center items-center mt-4 ">
     <div class="flex flex-row shadow-lg p-10 gap-8">
       <CardInformationMarket />
       <CardInformationMarket title="Customer Support 24/7" description="Instant access to Support" icon="headphone" />

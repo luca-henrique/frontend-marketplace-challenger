@@ -35,11 +35,11 @@ const pathIconUser = getToken.value ? '/dashboard' : '/entrar';
 </script>
 
 <template>
-  <header class="flex flex-row border-b-2 border-[#E5E5E5] p-4 items-center justify-around">
+  <header class="flex flex-row border-b-2 border-[#E5E5E5] p-4 items-center justify-around md:w-full">
 
     <HeaderLogo />
 
-    <form class="flex flex-row w-[497px] mx-4 h-[44px]" @submit.prevent="handleSearchProduct">
+    <form class="flex flex-row w-[497px] mx-4 h-[44px] md:w-full" @submit.prevent="handleSearchProduct">
       <input type="text" placeholder="Search"
         class="w-full bg-[#Fff] border-[1px] border-[#d5d5d5] h-[44px] p-3 rounded-s-md" />
 
@@ -48,7 +48,7 @@ const pathIconUser = getToken.value ? '/dashboard' : '/entrar';
           class="w-[54px] h-[44px] bg-[#00B207] p-2 rounded-r-md" />
       </button>
     </form>
-    <div class="flex flex-row gap-4">
+    <div class="flex flex-row gap-4 ">
       <NuxtLink class="flex flex-row  relative items-center" href="/whitelist">
         <img src="~/assets/icons/heart-icon.svg" alt="Cart Icon" class="h-8 w-8" />
         <p

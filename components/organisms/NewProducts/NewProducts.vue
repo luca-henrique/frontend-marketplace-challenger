@@ -11,7 +11,7 @@ const loading = status.value === 'success'
 </script>
 
 <template>
-  <section class="flex flex-col justify-center items-center py-[60px]">
+  <section class="flex flex-col justify-center items-center py-[60px] sm:bg-black">
     <div class="w-[1320px]">
       <SectionHeader title="Produtos novos" path="products/news" />
       <div class="flex flex-row mt-4 flex-wrap gap-5">

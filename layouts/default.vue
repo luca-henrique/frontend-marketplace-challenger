@@ -5,9 +5,9 @@ import Footer from "~/components/organisms/Footer/Footer.vue";
 </script>
 
 <template>
-  <div>
+  <div class="w-full h-full">
     <Header />
-    <div>
+    <div class="w-full h-full">
       <slot />
     </div>
     <Footer />

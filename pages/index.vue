@@ -12,9 +12,8 @@ import NewProducts from "~/components/organisms/NewProducts/NewProducts.vue";
 
 </script>
 
-
 <template>
-  <div class="flex flex-col h-full bg-white justify-center ">
+  <div class="flex flex-col h-full bg-white justify-center">
     <BannerSwiper />
     <Informations />
     <Categories />

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import "@/assets/css/tailwind.css";
-import 'swiper/css';
+
 
 import BannerSwiper from "~/components/molecules/BannerSwiper/BannerSwiper.vue";
 import Informations from "~/components/organisms/Informations/Informations.vue";
@@ -10,16 +10,21 @@ import FeaturedProducts from "~/components/organisms/FeaturedProducts/FeaturedPr
 import BannerOffer from "~/components/organisms/BannerOffer/BannerOffer.vue";
 import NewProducts from "~/components/organisms/NewProducts/NewProducts.vue";
 
+
+
+
 </script>
 
 <template>
-  <div class="flex flex-col h-full bg-white justify-center">
-    <BannerSwiper />
-    <Informations />
-    <Categories />
-    <SaleInformations />
-    <FeaturedProducts />
-    <BannerOffer />
-    <NewProducts />
+  <div>
+    <div class="flex flex-col h-full bg-white">
+      <BannerSwiper />
+      <Informations />
+      <Categories />
+      <SaleInformations />
+      <FeaturedProducts />
+      <BannerOffer />
+      <NewProducts />
+    </div>
   </div>
 </template>

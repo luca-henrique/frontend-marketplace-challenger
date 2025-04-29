@@ -2,6 +2,9 @@
 
 import Header from '~/components/organisms/Header/Header.vue';
 import Footer from "~/components/organisms/Footer/Footer.vue";
+import MobileMenu from "~/components/molecules/MobileMenu/MobileMenu.vue";
+
+
 </script>
 
 <template>
@@ -11,5 +14,7 @@ import Footer from "~/components/organisms/Footer/Footer.vue";
       <slot />
     </div>
     <Footer />
+    <MobileMenu />
+
   </div>
 </template>

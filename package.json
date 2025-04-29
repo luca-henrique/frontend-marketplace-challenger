@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "network:dev": "nuxt dev --host 0.0.0.0 --port 3000"
   },
   "dependencies": {
     "@nuxt/image": "^1.8.1",
